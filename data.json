@@ -1,0 +1,19 @@
+{
+    "key1": {
+        "UK": {
+            "capital": "London"
+        },
+        "India": {
+            "capital": "New Delhi"
+        },
+        "Nepal": {
+            "capital": "Kathmandu"
+        },
+        "USA": {
+            "capital": "Washington, D.C."
+        },
+        "Bhutan": {
+            "capital": "Thimpu"
+        }
+    }
+}
