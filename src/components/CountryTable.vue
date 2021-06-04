@@ -1,44 +1,46 @@
 <template>
-  <div v-for="(objData, numIndex) in metaDataObjArray" :key="numIndex">
-    <ul v-for="(obj, keyIndex) in objData" :key="keyIndex">
-      <li>
-        <span
-          @click="keyClicked(keyIndex)"
-          :class="openKeys.includes(keyIndex) ? 'caret-down' : 'caret'"
-        ></span
-        >{{ keyIndex }}
-      </li>
-      <li v-if="openKeys.includes(keyIndex)" class="country">
-        <ul v-for="(data, countryIndex) in obj" :key="countryIndex">
-          <li>
-            <span
-              @click="countryClicked(keyIndex, countryIndex)"
-              :class="
+  <div class="tree-view">
+    <div v-for="(objData, numIndex) in metaDataObjArray" :key="numIndex">
+      <ul v-for="(obj, keyIndex) in objData" :key="keyIndex">
+        <li>
+          <span
+            @click="keyClicked(keyIndex)"
+            :class="openKeys.includes(keyIndex) ? 'caret-down' : 'caret'"
+          ></span
+          >{{ keyIndex }}
+        </li>
+        <li v-if="openKeys.includes(keyIndex)" class="country">
+          <ul v-for="(data, countryIndex) in obj" :key="countryIndex">
+            <li>
+              <span
+                @click="countryClicked(keyIndex, countryIndex)"
+                :class="
+                  openKeyCountry
+                    .toString()
+                    .includes([keyIndex, countryIndex].toString())
+                    ? 'caret-down'
+                    : 'caret'
+                "
+              ></span>
+              {{ countryIndex }}
+            </li>
+
+            <ul
+              v-if="
                 openKeyCountry
                   .toString()
                   .includes([keyIndex, countryIndex].toString())
-                  ? 'caret-down'
-                  : 'caret'
               "
-            ></span>
-            {{ countryIndex }}
-          </li>
-
-          <ul
-            v-if="
-              openKeyCountry
-                .toString()
-                .includes([keyIndex, countryIndex].toString())
-            "
-            class="country"
-          >
-            <li v-for="(prop, propIndex) in data" :key="propIndex">
-              {{ propIndex }} : {{ prop }}
-            </li>
+              class="country"
+            >
+              <li v-for="(prop, propIndex) in data" :key="propIndex">
+                {{ propIndex }} : {{ prop }}
+              </li>
+            </ul>
           </ul>
-        </ul>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -153,6 +155,10 @@ export default {
   display: inline-block;
   margin-right: 6px;
   transform: rotate(90deg);
+}
+
+.tree-view{
+  padding: 20px;
 }
 
 .country {
